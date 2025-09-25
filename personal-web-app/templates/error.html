@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error {{ error_code }} - S M Fahim Alam's App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .error-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+        }
+        
+        .error-code {
+            font-size: 4em;
+            color: #e74c3c;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        
+        .error-message {
+            font-size: 1.5em;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        .developer-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+        }
+        
+        .developer-info p {
+            color: #666;
+            font-size: 0.9em;
+            margin: 5px 0;
+        }
+        
+        .back-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            transition: transform 0.3s ease;
+            margin: 5px;
+        }
+        
+        .back-button:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-code">{{ error_code }}</div>
+        <div class="error-message">{{ error_message }}</div>
+        
+        <div class="developer-info">
+            <p><strong>Developer:</strong> {% if developer %}{{ developer }}{% else %}S M Fahim Alam{% endif %}</p>
+            <p><strong>Application:</strong> Personal Web App with REST API</p>
+            <p><strong>Main API:</strong> <code>/api/name</code> - Returns developer name</p>
+        </div>
+        
+        <div>
+            <a href="/" class="back-button">← Back to Main Page</a>
+            <a href="/api/name" class="back-button">Test Name API</a>
+        </div>
+    </div>
+</body>
+</html>

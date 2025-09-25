@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S M Fahim Alam - Personal Web App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.2em;
+        }
+        
+        .developer-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        
+        .content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .system-info {
+            margin: 10px 0;
+        }
+        
+        .system-info strong {
+            color: #34495e;
+        }
+        
+        .api-demo {
+            margin-top: 20px;
+        }
+        
+        .button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.3s ease;
+            margin: 5px;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .button:disabled {
+            opacity: 0.6;
+            transform: none;
+            cursor: not-allowed;
+        }
+        
+        .api-result {
+            margin-top: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            display: none;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .feature-list {
+            list-style: none;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .feature-list li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .contact-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .contact-link {
+            background: #3498db;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 0.9em;
+            transition: background 0.3s ease;
+        }
+        
+        .contact-link:hover {
+            background: #2980b9;
+        }
+        
+        .github-link {
+            background: #333;
+        }
+        
+        .github-link:hover {
+            background: #555;
+        }
+        
+        .requirement-badge {
+            background: #e74c3c;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: 10px;
+        }
+        
+        .footer {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer p {
+            color: #7f8c8d;
+        }
+        
+        .footer a {
+            color: #667eea;
+            text-decoration: none;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-links {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>S M Fahim Alam - Personal Web Application</h1>
+            <p>Welcome to my personalized web application with REST API!</p>
+            <div class="developer-badge">Developer: {{ system_info.developer }}</div>
+        </div>
+        
+        <div class="content">
+            <div class="card">
+                <h2>System Information</h2>
+                <div class="system-info">
+                    <p><strong>Developer:</strong> {{ system_info.developer }}</p>
+                    <p><strong>Email:</strong> {{ system_info.email }}</p>
+                    <p><strong>Server:</strong> {{ system_info.hostname }}</p>
+                    <p><strong>Platform:</strong> {{ system_info.platform }}</p>
+                    <p><strong>Python Version:</strong> {{ system_info.python_version }}</p>
+                    <p><strong>Timestamp:</strong> {{ system_info.timestamp }}</p>
+                    <p><strong>Port:</strong> {{ system_info.environment.port }}</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>API Demo <span class="requirement-badge">MAIN REQUIREMENT</span></h2>
+                <p>Test the name API endpoint (required for identification):</p>
+                <div class="api-demo">
+                    <button class="button" onclick="testNameAPI()">Get My Name (Required)</button>
+                    <button class="button" onclick="testPortfolioAPI()">Get Portfolio</button>
+                    <button class="button" onclick="testSystemAPI()">Get System Info</button>
+                    <div id="api-result" class="api-result"></div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h2>Personal Features</h2>
+                <ul class="feature-list">
+                    <li>REST API with name endpoint (/api/name)</li>
+                    <li>Personal portfolio and skills showcase</li>
+                    <li>System monitoring and health checks</li>
+                    <li>Responsive modern design</li>
+                    <li>Docker containerization</li>
+                    <li>CSC Rahti deployment ready</li>
+                    <li>Auto-scaling capabilities</li>
+                    <li>Security best practices</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h2>Contact & Links</h2>
+                <p><strong>Developer:</strong> {{ system_info.developer }}</p>
+                <p><strong>Email:</strong> {{ system_info.email }}</p>
+                <div class="contact-links">
+                    <a href="{{ system_info.github }}" target="_blank" class="contact-link github-link">GitHub</a>
+                    <a href="{{ system_info.linkedin }}" target="_blank" class="contact-link">LinkedIn</a>
+                    <a href="/health" target="_blank" class="contact-link">Health Check</a>
+                    <a href="/api/name" target="_blank" class="contact-link">Name API</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>
+                <strong>{{ system_info.developer }}'s Personal Web Application</strong><br>
+                Deployed on CSC's Rahti platform.<br>
+                <em>Main API endpoint for identification: <code>/api/name</code></em>
+            </p>
+        </div>
+    </div>
+    
+    <script>
+        async function callAPI(endpoint, buttonText) {
+            const buttons = document.querySelectorAll('.button');
+            const resultDiv = document.getElementById('api-result');
+            
+            buttons.forEach(btn => {
+                if (btn.textContent === buttonText) {
+                    btn.textContent = 'Loading...';
+                    btn.disabled = true;
+                }
+            });
+            
+            try {
+                const response = await fetch(endpoint);
+                const data = await response.json();
+                
+                resultDiv.innerHTML = `
+                    <h3>API Response from ${endpoint}:</h3>
+                    <pre>${JSON.stringify(data, null, 2)}</pre>
+                `;
+                resultDiv.style.display = 'block';
+                
+            } catch (error) {
+                resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+                resultDiv.style.display = 'block';
+            }
+            
+            buttons.forEach(btn => {
+                if (btn.disabled) {
+                    btn.textContent = buttonText;
+                    btn.disabled = false;
+                }
+            });
+        }
+        
+        function testNameAPI() {
+            callAPI('/api/name', 'Get My Name (Required)');
+        }
+        
+        function testPortfolioAPI() {
+            callAPI('/api/portfolio', 'Get Portfolio');
+        }
+        
+        function testSystemAPI() {
+            callAPI('/info', 'Get System Info');
+        }
+        
+        console.log('S M Fahim Alam\'s Personal Web Application initialized');
+        console.log('Main API endpoint: /api/name');
+    </script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fahim-personal-app
+  labels:
+    app: fahim-personal-app
+    developer: s-m-fahim-alam
+    version: v1
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  selector:
+    matchLabels:
+      app: fahim-personal-app
+  template:
+    metadata:
+      labels:
+        app: fahim-personal-app
+        developer: s-m-fahim-alam
+        version: v1
+    spec:
+      securityContext:
+        runAsNonRoot: true
+      containers:
+      - name: fahim-personal-app
+        image: image-registry.openshift-image-registry.svc:5000/NAMESPACE/fahim-personal-app:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        env:
+        - name: FLASK_ENV
+          value: "production"
+        - name: PORT
+          value: "8080"
+        - name: DEVELOPER_NAME
+          value: "S M Fahim Alam"
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: fahim-app-secrets
+              key: secret-key
+              optional: true
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "300m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+          capabilities:
+            drop:
+            - ALL
+        volumeMounts:
+        - name: temp-storage
+          mountPath: /tmp
+      volumes:
+      - name: temp-storage
+        emptyDir: {}
+      restartPolicy: Always
