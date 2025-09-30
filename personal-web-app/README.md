@@ -5,7 +5,7 @@ A modern, responsive web application with REST API integration, deployed on CSC'
 ## Developer Information
 - **Name**: S M Fahim Alam
 - **Email**: salsm24@students.oamk.fi
-- **GitHub**: https://github.com/smfahimalam/personal-web-app
+- **GitHub**: https://github.com/nopun8/personal-web-app
 
 ## Main Requirement
 - **API Endpoint**: `/api/name` - Returns developer name for identification
@@ -20,5 +20,5 @@ A modern, responsive web application with REST API integration, deployed on CSC'
 
 1. **Clone Repository**
 ```bash
-   git clone https://github.com/smfahimalam/personal-web-app.git
-   cd personal-web-app
+   git clone https://github.com/nopun8/personal-web-app.git
+   cd personal-web-app/personal-web-app

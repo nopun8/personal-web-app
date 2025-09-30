@@ -37,7 +37,7 @@ app.config['DEBUG'] = os.environ.get('FLASK_DEBUG', 'False').lower() == 'true'
 # Personal Information - MAIN REQUIREMENT
 DEVELOPER_NAME = "S M Fahim Alam"
 DEVELOPER_EMAIL = "salsm24@students.oamk.fi"
-GITHUB_REPO = "https://github.com/smfahimalam/personal-web-app"
+GITHUB_REPO = "https://github.com/nopun8/personal-web-app"
 LINKEDIN_PROFILE = "https://linkedin.com/in/smfahimalam"
 
 def get_system_info():
